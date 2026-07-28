@@ -192,6 +192,7 @@
 function pct(v) { return v == null ? "—" : Math.round(v * 100) + "%"; }
 
 function fmtKickoff(iso) {
+  if (!iso) return "horário a definir";
   const d = new Date(iso);
   const dias = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
   const dia = dias[d.getDay()];
@@ -303,7 +304,7 @@ function renderMatch(m, idx) {
       <div class="match-head" onclick="toggleDetail('${id}')">
         <div class="match-top-row">
           <div class="teams">${m.casa} ${casaLabel} <span style="color:var(--text-faint)">x</span> ${m.fora} ${foraLabel}</div>
-          <div class="meta">${m.rodada} · ${fmtKickoff(m.kickoff)}</div>
+          <div class="meta">${m.rodada} · ${fmtKickoff(m.kickoff)}${m.local ? ` · ${m.local}` : ""}</div>
         </div>
         <div class="badges">${badgesFor(m)}</div>
         ${marketBar(m.mercado)}
